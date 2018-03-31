@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { View, Text, TextInput, TouchableOpacity } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, ActivityIndicator } from 'react-native';
+import PropTypes from 'prop-types';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -8,6 +9,14 @@ import { Creators as PointActions } from 'store/ducks/points';
 import styles from './styles';
 
 class PageModal extends Component {
+  static propTypes = {
+    closeModal: PropTypes.func.isRequired,
+    addPointRequest: PropTypes.func.isRequired,
+    points: PropTypes.shape({
+      loading: PropTypes.bool,
+      errorOnAdd: PropTypes.oneOfType([null, PropTypes.string]),
+    }).isRequired,
+  };
   state = {
     repoNameInput: '',
   };
@@ -17,6 +26,9 @@ class PageModal extends Component {
       <View style={styles.container}>
         <View style={styles.containerModal}>
           <Text style={styles.title}>Adicionar novo local</Text>
+          { !!this.props.points.errorOnAdd && (
+            <Text style={styles.error}>{this.props.points.errorOnAdd}</Text>
+          )}
           <TextInput
             style={styles.input}
             autoCapitalize="none"
@@ -40,7 +52,10 @@ class PageModal extends Component {
               onPress={() => this.props.addPointRequest(this.state.repoNameInput)}
               activeOpacity={0.6}
             >
-              <Text style={styles.buttonText}>Adicionar</Text>
+              { this.props.points.loading
+                ? <ActivityIndicator size="small" color="#999" />
+                : <Text style={styles.buttonText}>Adicionar</Text>
+              }
             </TouchableOpacity>
           </View>
         </View>

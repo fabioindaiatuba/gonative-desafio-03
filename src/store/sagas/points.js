@@ -4,7 +4,11 @@ import api from 'Services/api';
 import { Creators as PointActions } from 'store/ducks/points';
 
 export function* addPointRequest(action) {
-  const response = yield call(api.get, `/users/${action.payload.userGit}`);
+  try {
+    const response = yield call(api.get, `/users/${action.payload.userGit}`);
 
-  yield put(PointActions.addPointSuccess(response.data));
+    yield put(PointActions.addPointSuccess(response.data));
+  } catch (err) {
+    yield put(PointActions.addPointError('Usuário Git não existe'));
+  }
 }

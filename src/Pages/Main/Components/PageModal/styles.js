@@ -55,6 +55,12 @@ const styles = StyleSheet.create({
     color: colors.white,
     fontSize: 16,
   },
+  error: {
+    fontWeight: 'bold',
+    color: colors.danger,
+    alignSelf: 'center',
+    marginBottom: metrics.baseMargin,
+  },
 });
 
 export default styles;
