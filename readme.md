@@ -1,6 +1,6 @@
 # Desafio Módulo 03 - GoNative
 
-![imagem com a tela do sistema](https://github.com/fabioindaiatuba/gonative-desafio-03/raw/master/telas/tela1.png)
+![imagem com a tela do sistema](https://github.com/fabioindaiatuba/gonative-desafio-03/raw/master/snapshots/tela1.png)
 
 ## Funções
 
